@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test_pep8
 
 jobs:
   backend_linter:
