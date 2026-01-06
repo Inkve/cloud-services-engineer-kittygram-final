@@ -25,3 +25,12 @@ jobs:
 
     - name: Test with flake8
       run: python -m flake8 backend/
+
+  run_tests:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Run backend tests
+      working-directory: backend
+      run: |
+        pip install -r requirements.txt
+        pytest
