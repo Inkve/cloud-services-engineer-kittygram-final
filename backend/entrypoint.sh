@@ -14,6 +14,7 @@ python manage.py migrate --noinput
 
 echo "🎨 Получение статичных файлов..."
 python manage.py collectstatic --noinput
+cp -rfv /app/collected_static/* /app/static
 
 echo "🚀 Запуск бэкенда..."
 exec gunicorn kittygram_backend.wsgi:application \
