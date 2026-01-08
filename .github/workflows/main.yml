@@ -95,7 +95,6 @@ jobs:
             sudo docker compose -f docker-compose.production.yml up -d
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate --noinput
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
-            sudo docker compose -f docker-compose.production.yml exec backend cp -rfv /app/collected_static/* /app/backend_static/static/
 
   run_autotests:
     runs-on: ubuntu-latest

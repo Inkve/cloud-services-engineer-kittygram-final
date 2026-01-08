@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - review_edits
 
 jobs:
   backend_linter:
@@ -95,7 +94,6 @@ jobs:
             sudo docker compose -f docker-compose.production.yml up -d
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate --noinput
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
-            sudo docker compose -f docker-compose.production.yml exec backend cp -rfv /app/collected_static/* /app/static
 
   run_autotests:
     runs-on: ubuntu-latest
