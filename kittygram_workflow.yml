@@ -1,4 +1,4 @@
-name: kittygram workflow CI/CD
+name: Kittygram workflow CI/CD
 
 on:
   push:
@@ -100,7 +100,7 @@ jobs:
     needs: deploy
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10"]
     steps:
       - name: Check out code
         uses: actions/checkout@v3
