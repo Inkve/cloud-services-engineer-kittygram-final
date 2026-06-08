@@ -72,6 +72,12 @@ variable "cores" {
   default     = 2
 }
 
+variable "core_fraction" {
+  description = "Гарантированная доля CPU"
+  type        = number
+  default     = 20
+}
+
 variable "memory" {
   description = "Объем RAM (ГБ)"
   type        = number
