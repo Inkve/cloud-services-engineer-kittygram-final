@@ -89,7 +89,7 @@ jobs:
         with:
           host: ${{ steps.read-ip.outputs.VM_IP }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "docker-compose.production.yml"
           target: "~/kittygram/"
           timeout: "60s"
@@ -99,7 +99,7 @@ jobs:
         with:
           host: ${{ steps.read-ip.outputs.VM_IP }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/kittygram/
             cat > .env << EOF
