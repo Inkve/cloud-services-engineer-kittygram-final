@@ -54,6 +54,20 @@ jobs:
       working-directory: ./infra
       run: terraform apply -auto-approve
 
+    - name: Get VM IP from Terraform output
+      if: github.event.inputs.action == 'apply' && success()
+      working-directory: ./infra
+      run: |
+        # Извлекаем только IPv4-адрес из вывода terraform output
+        VM_IP=$(terraform output -raw vm_1_public_ip | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+        echo "$VM_IP" > vm_ip.txt
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: vm-ip
+        path: infra/vm_ip.txt
+
     - name: Terraform Destroy
       if: github.event.inputs.action == 'destroy'
       run: terraform destroy -auto-approve   
