@@ -15,6 +15,7 @@ on:
 env:
   TF_VAR_cloud_id: ${{ secrets.CLOUD_ID }}
   TF_VAR_folder_id: ${{ secrets.FOLDER_ID }}
+  TF_VAR_aws_region: ${{ secrets.AWS_REGION}}
   TF_VAR_ssh_key: ${{ secrets.SSH_OPEN }}
   ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
