@@ -14,7 +14,7 @@ services:
       - pg_data:/var/lib/postgresql/data
 
   backend:
-    image: inkve/kittygram_backend
+    image: ${DOCKERHUB_USERNAME}/kittygram_backend
     env_file: .env
     volumes:
       - static:/app/backend_static/.
@@ -23,12 +23,12 @@ services:
       - postgres  
 
   frontend:
-    image: inkve/kittygram_frontend
+    image: ${DOCKERHUB_USERNAME}/kittygram_frontend
     volumes:
       - static:/app/build/.
 
   gateway:
-    image: inkve/kittygram_gateway
+    image: ${DOCKERHUB_USERNAME}/kittygram_gateway
     volumes:
       - static:/static/
       - media:/media/
