@@ -1,0 +1,58 @@
+name: Terraform
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Select the Terraform action'
+        required: true
+        default: 'plan'
+        options:
+          - plan
+          - apply
+          - destroy 
+
+env:
+  TF_VAR_cloud_id: ${{ secrets.CLOUD_ID }}
+  TF_VAR_folder_id: ${{ secrets.FOLDER_ID }}
+  TF_VAR_ssh_key: ${{ secrets.SSH_OPEN }}
+  ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.8.3
+
+    - name: Set up Yandex Cloud service account key
+      working-directory: ./infra
+      run: |
+        cat > ./authorized_key.json << 'EOF'
+        ${{ secrets.YC_KEY_JSON }}
+        EOF
+
+    - name: Initialize Terraform
+      working-directory: ./infra
+      run: terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY"
+
+    - name: Terraform Plan
+      if: github.event.inputs.action == 'plan'
+      working-directory: ./infra
+      run: terraform plan
+
+    - name: Terraform Apply
+      if: github.event.inputs.action == 'apply'
+      working-directory: ./infra
+      run: terraform apply -auto-approve
+
+    - name: Terraform Destroy
+      if: github.event.inputs.action == 'destroy'
+      run: terraform destroy -auto-approve   

@@ -1,9 +1,10 @@
 name: Kittygram workflow CI/CD
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Terraform"]
+    types:
+      - completed
 
 jobs:
   backend_linter:
