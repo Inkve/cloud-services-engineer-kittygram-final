@@ -1,12 +1,8 @@
-# ===============
-# Cloud config
-# ===============
-
-ssh_pwauth: no
-
+#cloud-config
 users:
   - name: user
-    sudo: ALL=(ALL) NOPASSWD:ALL
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
+    groups: sudo
     shell: /bin/bash
     ssh_authorized_keys:
       - ${SSH_KEY}
