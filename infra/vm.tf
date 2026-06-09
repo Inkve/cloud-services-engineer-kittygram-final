@@ -14,7 +14,6 @@ resource "yandex_compute_instance" "vm_1" {
 
   resources {
     cores         = var.cores
-    core_fraction = var.core_fraction
     memory        = var.memory
   }
 
