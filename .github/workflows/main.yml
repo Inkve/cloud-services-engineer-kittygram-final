@@ -94,6 +94,7 @@ jobs:
           target: "~/kittygram/"
           timeout: "60s"
           command_timeout: "10m"
+
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
